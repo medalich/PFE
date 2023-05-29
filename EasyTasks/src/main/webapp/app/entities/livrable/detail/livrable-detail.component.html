@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="livrable">
+      <h2 data-cy="livrableDetailsHeading"><span jhiTranslate="easyTasksApp.livrable.detail.title">Livrable</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ livrable.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="easyTasksApp.livrable.refLivrable" [ngbTooltip]="'easyTasksApp.livrable.help.refLivrable' | translate"
+            >Ref Livrable</span
+          >
+        </dt>
+        <dd>
+          <span>{{ livrable.refLivrable }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ livrable.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ livrable.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.description">Description</span></dt>
+        <dd>
+          <span>{{ livrable.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyTasksApp.Etat.' + livrable.etat }}">{{ livrable.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="livrable.projet">
+            <a [routerLink]="['/projet', livrable.projet.id, 'view']">{{ livrable.projet.refProjet }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.livrable.facture">Facture</span></dt>
+        <dd>
+          <div *ngIf="livrable.facture">
+            <a [routerLink]="['/facture', livrable.facture.id, 'view']">{{ livrable.facture.refFacture }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/livrable', livrable.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

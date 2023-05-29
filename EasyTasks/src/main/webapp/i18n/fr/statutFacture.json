@@ -1,0 +1,10 @@
+{
+  "easyTasksApp": {
+    "StatutFacture": {
+      "null": "",
+      "Paye": "Paye",
+      "NonPaye": "NonPaye",
+      "Bloque": "Bloque"
+    }
+  }
+}

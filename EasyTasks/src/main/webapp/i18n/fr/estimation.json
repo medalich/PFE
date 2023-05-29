@@ -1,0 +1,31 @@
+{
+  "easyTasksApp": {
+    "estimation": {
+      "home": {
+        "title": "Estimations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Estimation",
+        "createOrEditLabel": "Créer ou éditer un Estimation",
+        "notFound": "Aucun Estimation trouvé"
+      },
+      "created": "Un nouveau Estimation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Estimation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Estimation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Estimation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Estimation"
+      },
+      "id": "ID",
+      "date": "Date",
+      "valeurJour": "Valeur Jour",
+      "valeurHeure": "Valeur Heure",
+      "priseEnCharge": "Prise En Charge",
+      "type": "Type",
+      "projet": "Projet",
+      "livrable": "Livrable",
+      "activite": "Activite"
+    }
+  }
+}

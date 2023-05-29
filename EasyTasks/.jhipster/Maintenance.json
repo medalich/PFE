@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230507160750",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "maintenance",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "produit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "solution",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Etat",
+      "fieldTypeJavadoc": "not an ignored comment",
+      "fieldValues": "Planifier,EnCours,Termine"
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Maintenance",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "ressource",
+      "otherEntityRelationshipName": "maintenance",
+      "relationshipName": "ressource",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

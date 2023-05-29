@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-facture-heading" data-cy="FactureCreateUpdateHeading" jhiTranslate="easyTasksApp.facture.home.createOrEditLabel">
+        Créer ou éditer un Facture
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.refFacture" for="field_refFacture">Ref Facture</label>
+          <input
+            type="text"
+            class="form-control"
+            name="refFacture"
+            id="field_refFacture"
+            data-cy="refFacture"
+            formControlName="refFacture"
+          />
+          <div *ngIf="editForm.get('refFacture')!.invalid && (editForm.get('refFacture')!.dirty || editForm.get('refFacture')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('refFacture')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('refFacture')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 20 }"
+            >
+              Ce champ doit faire moins de 20 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.dateFacture" for="field_dateFacture">Date Facture</label>
+          <div class="input-group">
+            <input
+              id="field_dateFacture"
+              data-cy="dateFacture"
+              type="text"
+              class="form-control"
+              name="dateFacture"
+              ngbDatepicker
+              #dateFactureDp="ngbDatepicker"
+              formControlName="dateFacture"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFactureDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.montant" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'easyTasksApp.StatutFacture.null' | translate }}</option>
+            <option *ngFor="let statutFacture of statutFactureValues" [value]="statutFacture">
+              {{ 'easyTasksApp.StatutFacture.' + statutFacture | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.client" for="field_client">Client</label>
+          <select
+            class="form-control"
+            id="field_client"
+            data-cy="client"
+            name="client"
+            formControlName="client"
+            [compareWith]="compareClient"
+          >
+            <option *ngIf="editForm.get(['client'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="clientOption" *ngFor="let clientOption of clientsSharedCollection">{{ clientOption.nom }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['client'])!.invalid && (editForm.get(['client'])!.dirty || editForm.get(['client'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['client'])?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.facture.projet" for="field_projet">Projet</label>
+          <select
+            class="form-control"
+            id="field_projet"
+            data-cy="projet"
+            name="projet"
+            formControlName="projet"
+            [compareWith]="compareProjet"
+          >
+            <option *ngIf="editForm.get(['projet'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.refProjet }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['projet'])!.invalid && (editForm.get(['projet'])!.dirty || editForm.get(['projet'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['projet'])?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

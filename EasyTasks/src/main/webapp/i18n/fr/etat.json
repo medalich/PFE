@@ -1,0 +1,10 @@
+{
+  "easyTasksApp": {
+    "Etat": {
+      "null": "",
+      "Planifier": "Planifier",
+      "EnCours": "EnCours",
+      "Termine": "Termine"
+    }
+  }
+}

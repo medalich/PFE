@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="maintenance">
+      <h2 data-cy="maintenanceDetailsHeading"><span jhiTranslate="easyTasksApp.maintenance.detail.title">Maintenance</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ maintenance.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.description">Description</span></dt>
+        <dd>
+          <span>{{ maintenance.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.produit">Produit</span></dt>
+        <dd>
+          <span>{{ maintenance.produit }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.solution">Solution</span></dt>
+        <dd>
+          <span>{{ maintenance.solution }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyTasksApp.Etat.' + maintenance.etat }}">{{ maintenance.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ maintenance.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ maintenance.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.duree">Duree</span></dt>
+        <dd>
+          <span>{{ maintenance.duree }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.maintenance.ressource">Ressource</span></dt>
+        <dd>
+          <div *ngIf="maintenance.ressource">
+            <a [routerLink]="['/ressource', maintenance.ressource.id, 'view']">{{ maintenance.ressource.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/maintenance', maintenance.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "easyTasksApp": {
+    "projet": {
+      "home": {
+        "title": "Projets",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Projet",
+        "createOrEditLabel": "Créer ou éditer un Projet",
+        "notFound": "Aucun Projet trouvé"
+      },
+      "created": "Un nouveau Projet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Projet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Projet avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Projet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Projet"
+      },
+      "id": "ID",
+      "refProjet": "Ref Projet",
+      "type": "Type",
+      "description": "Description",
+      "datedebut": "Datedebut",
+      "datefin": "Datefin",
+      "etat": "Etat",
+      "livrable": "Livrable",
+      "estimation": "Estimation",
+      "facture": "Facture",
+      "client": "Client"
+    }
+  }
+}

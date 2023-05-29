@@ -1,0 +1,27 @@
+{
+  "easyTasksApp": {
+    "ressource": {
+      "home": {
+        "title": "Ressources",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Ressource",
+        "createOrEditLabel": "Créer ou éditer un Ressource",
+        "notFound": "Aucun Ressource trouvé"
+      },
+      "created": "Un nouveau Ressource a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ressource avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ressource avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Ressource {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ressource"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "chargeJournaliere": "Charge Journaliere",
+      "maintenance": "Maintenance"
+    }
+  }
+}

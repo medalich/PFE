@@ -1,0 +1,35 @@
+{
+  "easyTasksApp": {
+    "livrable": {
+      "home": {
+        "title": "Livrables",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Livrable",
+        "createOrEditLabel": "Créer ou éditer un Livrable",
+        "notFound": "Aucun Livrable trouvé"
+      },
+      "created": "Un nouveau Livrable a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Livrable avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Livrable avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Livrable {{ id }} ?"
+      },
+      "detail": {
+        "title": "Livrable"
+      },
+      "id": "ID",
+      "refLivrable": "Ref Livrable",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "description": "Description",
+      "etat": "Etat",
+      "activite": "Activite",
+      "estimation": "Estimation",
+      "projet": "Projet",
+      "facture": "Facture",
+      "help": {
+        "refLivrable": "The firstname attribute."
+      }
+    }
+  }
+}

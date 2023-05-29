@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20230507160746",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "charge_journaliere",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeCharge",
+      "fieldValues": "Support,Dev,Autre"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ChargeJournaliere",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "ressource",
+      "otherEntityRelationshipName": "chargeJournaliere",
+      "relationshipName": "ressource",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

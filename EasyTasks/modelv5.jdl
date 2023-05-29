@@ -1,0 +1,136 @@
+
+entity ChargeJournaliere {
+	description String,
+    date LocalDate,
+    type TypeCharge,
+    duree Double
+    }
+    enum StatutFacture{
+    Paye, NonPaye, Bloque 
+    }
+entity Facture {
+	refFacture String required maxlength(20) unique,
+    dateFacture LocalDate,
+    montant Double,
+    description String,
+    etat StatutFacture
+  }
+
+enum TypeCharge {
+	Support, Dev, Autre
+    
+}
+
+// an ignored comment
+/** not an ignored comment */
+enum Etat {
+	Planifier,
+	EnCours,
+	Termine
+	
+}
+
+entity Projet {
+	refProjet String required maxlength(20) unique,
+    type Type,
+    description String,
+    datedebut LocalDate,
+    datefin LocalDate,
+    etat Etat
+    
+    
+  }
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+enum Type {
+	Interne,
+	Externe 
+}
+
+/**
+ * The Employee entity.
+ */
+entity Livrable {
+	/**
+	* The firstname attribute.
+	*/
+	refLivrable String  required maxlength(20) unique,
+	dateDebut LocalDate required,
+	dateFin LocalDate,
+	description String required,
+	etat Etat
+	
+}
+
+
+entity Activite {
+	refAct String required maxlength(20) unique ,
+	description String required,
+	dateDebut LocalDate required,
+    dateFin LocalDate,
+    raf String,
+    etat Etat
+}
+
+entity Maintenance {
+   description String required,
+   produit String,
+   solution String,
+   etat Etat,
+   dateDebut LocalDate,
+   dateFin LocalDate,
+   duree Double
+   
+   
+   
+}
+
+entity Ressource {
+	nom String required,
+    prenom String required
+}
+
+entity Client {
+	refClient String required maxlength(20) unique,
+    nom String required,
+    prenom String required,
+    contact String
+}
+
+enum TypeEntite {
+	Projet , Livrable , Activite
+}
+
+entity Estimation {
+	date LocalDate,
+   valeurJour Double,
+   valeurHeure Double,
+   priseEnCharge Boolean,
+   type TypeEntite
+   
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Client to Projet{client(nom) required}
+    Projet to Livrable {projet(refProjet) required} 
+    Projet to Estimation {projet(refProjet) required}
+    Livrable to Activite {livrable(refLivrable) required}
+    Livrable to Estimation {livrable(refLivrable) required}
+    Activite to Estimation {activite(refAct) required}
+    Ressource to ChargeJournaliere {ressource(nom) required}
+    Ressource to Maintenance {ressource(nom) required}
+   Facture to Livrable {facture(refFacture) }
+  Client to Facture {client(nom) required } 
+  Projet to Facture {projet(refProjet) required } 
+  
+    
+  
+	
+}
+
+
+

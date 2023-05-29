@@ -1,0 +1,62 @@
+{
+  "applications": "*",
+  "changelogDate": "20230507160753",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "estimation",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "valeurJour",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "valeurHeure",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "priseEnCharge",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeEntite",
+      "fieldValues": "Projet,Livrable,Activite"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Estimation",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "refProjet",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "estimation",
+      "relationshipName": "projet",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "refLivrable",
+      "otherEntityName": "livrable",
+      "otherEntityRelationshipName": "estimation",
+      "relationshipName": "livrable",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "refAct",
+      "otherEntityName": "activite",
+      "otherEntityRelationshipName": "estimation",
+      "relationshipName": "activite",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

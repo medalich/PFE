@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="LivrableHeading">
+    <span jhiTranslate="easyTasksApp.livrable.home.title">Livrables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyTasksApp.livrable.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-livrable"
+        [routerLink]="['/livrable/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="easyTasksApp.livrable.home.createLabel"> Créer un nouveau Livrable </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="livrables?.length === 0">
+    <span jhiTranslate="easyTasksApp.livrable.home.notFound">Aucun Livrable trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="livrables && livrables.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="refLivrable">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.refLivrable">Ref Livrable</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateDebut">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.dateDebut">Date Debut</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateFin">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.dateFin">Date Fin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="projet.refProjet">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.projet">Projet</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="facture.refFacture">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.livrable.facture">Facture</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livrable of livrables; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/livrable', livrable.id, 'view']">{{ livrable.id }}</a>
+          </td>
+          <td>{{ livrable.refLivrable }}</td>
+          <td>{{ livrable.dateDebut | formatMediumDate }}</td>
+          <td>{{ livrable.dateFin | formatMediumDate }}</td>
+          <td>{{ livrable.description }}</td>
+          <td jhiTranslate="{{ 'easyTasksApp.Etat.' + livrable.etat }}">{{ livrable.etat }}</td>
+          <td>
+            <div *ngIf="livrable.projet">
+              <a [routerLink]="['/projet', livrable.projet.id, 'view']">{{ livrable.projet.refProjet }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="livrable.facture">
+              <a [routerLink]="['/facture', livrable.facture.id, 'view']">{{ livrable.facture.refFacture }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/livrable', livrable.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/livrable', livrable.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(livrable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

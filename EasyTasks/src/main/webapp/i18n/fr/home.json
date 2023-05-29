@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Bienvenue ",
+    "subtitle": "",
+    "logged": {
+      "message": "Vous êtes connecté en tant que \"{{username}}\"."
+    }
+    
+  }
+}

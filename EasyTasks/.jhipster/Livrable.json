@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20230507160748",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "livrable",
+  "fields": [
+    {
+      "fieldName": "refLivrable",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "20",
+      "javadoc": "The firstname attribute."
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Etat",
+      "fieldTypeJavadoc": "not an ignored comment",
+      "fieldValues": "Planifier,EnCours,Termine"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Employee entity.",
+  "jpaMetamodelFiltering": false,
+  "name": "Livrable",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "activite",
+      "otherEntityRelationshipName": "livrable",
+      "relationshipName": "activite",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "estimation",
+      "otherEntityRelationshipName": "livrable",
+      "relationshipName": "estimation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "refProjet",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "livrable",
+      "relationshipName": "projet",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "refFacture",
+      "otherEntityName": "facture",
+      "otherEntityRelationshipName": "livrable",
+      "relationshipName": "facture",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

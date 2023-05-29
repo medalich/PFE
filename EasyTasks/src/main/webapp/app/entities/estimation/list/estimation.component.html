@@ -1,0 +1,149 @@
+<div>
+  <h2 id="page-heading" data-cy="EstimationHeading">
+    <span jhiTranslate="easyTasksApp.estimation.home.title">Estimations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyTasksApp.estimation.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-estimation"
+        [routerLink]="['/estimation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="easyTasksApp.estimation.home.createLabel"> Créer un nouveau Estimation </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="estimations?.length === 0">
+    <span jhiTranslate="easyTasksApp.estimation.home.notFound">Aucun Estimation trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="estimations && estimations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valeurJour">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.valeurJour">Valeur Jour</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valeurHeure">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.valeurHeure">Valeur Heure</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="priseEnCharge">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.priseEnCharge">Prise En Charge</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="projet.refProjet">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.projet">Projet</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="livrable.refLivrable">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.livrable">Livrable</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activite.refAct">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.estimation.activite">Activite</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estimation of estimations; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/estimation', estimation.id, 'view']">{{ estimation.id }}</a>
+          </td>
+          <td>{{ estimation.date | formatMediumDate }}</td>
+          <td>{{ estimation.valeurJour }}</td>
+          <td>{{ estimation.valeurHeure }}</td>
+          <td>{{ estimation.priseEnCharge }}</td>
+          <td jhiTranslate="{{ 'easyTasksApp.TypeEntite.' + estimation.type }}">{{ estimation.type }}</td>
+          <td>
+            <div *ngIf="estimation.projet">
+              <a [routerLink]="['/projet', estimation.projet.id, 'view']">{{ estimation.projet.refProjet }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="estimation.livrable">
+              <a [routerLink]="['/livrable', estimation.livrable.id, 'view']">{{ estimation.livrable.refLivrable }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="estimation.activite">
+              <a [routerLink]="['/activite', estimation.activite.id, 'view']">{{ estimation.activite.refAct }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/estimation', estimation.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/estimation', estimation.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(estimation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

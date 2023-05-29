@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="floatType" value="float" dbms="mysql"/>
+    <property name="clobType" value="clob" dbms="mysql"/>
+    <property name="blobType" value="longblob" dbms="mysql"/>
+    <property name="uuidType" value="varchar(36)" dbms="mysql"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160746_added_entity_ChargeJournaliere.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160747_added_entity_Projet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160748_added_entity_Livrable.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160749_added_entity_Activite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160750_added_entity_Maintenance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160751_added_entity_Ressource.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160752_added_entity_Client.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160753_added_entity_Estimation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230523163815_added_entity_Facture.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20230507160746_added_entity_constraints_ChargeJournaliere.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160747_added_entity_constraints_Projet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160748_added_entity_constraints_Livrable.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160749_added_entity_constraints_Activite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160750_added_entity_constraints_Maintenance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230507160753_added_entity_constraints_Estimation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230523163815_added_entity_constraints_Facture.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

@@ -1,0 +1,11 @@
+id;date;valeur_jour;valeur_heure;prise_en_charge;type;projet_id;livrable_id;activite_id
+1;2023-05-06;75511;11856;true;Livrable;1;1;1
+2;2023-05-07;14811;22370;true;Projet;2;2;2
+3;2023-05-07;78260;43147;true;Projet;3;3;3
+4;2023-05-07;94585;63392;true;Activite;4;4;4
+5;2023-05-07;70476;32397;true;Livrable;5;5;5
+6;2023-05-07;95987;87580;true;Livrable;6;6;6
+7;2023-05-06;97810;92878;true;Projet;7;7;7
+8;2023-05-07;63062;96046;true;Livrable;8;8;8
+9;2023-05-07;72212;21587;false;Activite;9;9;9
+10;2023-05-07;75869;3942;false;Activite;10;10;10

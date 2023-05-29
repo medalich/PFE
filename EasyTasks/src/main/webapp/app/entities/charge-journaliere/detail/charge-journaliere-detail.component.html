@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chargeJournaliere">
+      <h2 data-cy="chargeJournaliereDetailsHeading">
+        <span jhiTranslate="easyTasksApp.chargeJournaliere.detail.title">Charge Journaliere</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chargeJournaliere.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.chargeJournaliere.description">Description</span></dt>
+        <dd>
+          <span>{{ chargeJournaliere.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.chargeJournaliere.date">Date</span></dt>
+        <dd>
+          <span>{{ chargeJournaliere.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.chargeJournaliere.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyTasksApp.TypeCharge.' + chargeJournaliere.type }}">{{ chargeJournaliere.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.chargeJournaliere.duree">Duree</span></dt>
+        <dd>
+          <span>{{ chargeJournaliere.duree }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.chargeJournaliere.ressource">Ressource</span></dt>
+        <dd>
+          <div *ngIf="chargeJournaliere.ressource">
+            <a [routerLink]="['/ressource', chargeJournaliere.ressource.id, 'view']">{{ chargeJournaliere.ressource.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/charge-journaliere', chargeJournaliere.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

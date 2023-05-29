@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="ActiviteHeading">
+    <span jhiTranslate="easyTasksApp.activite.home.title">Activites</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyTasksApp.activite.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-activite"
+        [routerLink]="['/activite/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="easyTasksApp.activite.home.createLabel"> Créer un nouveau Activite </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="activites?.length === 0">
+    <span jhiTranslate="easyTasksApp.activite.home.notFound">Aucun Activite trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="activites && activites.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="refAct">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.refAct">Ref Act</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateDebut">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.dateDebut">Date Debut</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateFin">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.dateFin">Date Fin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="raf">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.raf">Raf</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="livrable.refLivrable">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.activite.livrable">Livrable</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activite of activites; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/activite', activite.id, 'view']">{{ activite.id }}</a>
+          </td>
+          <td>{{ activite.refAct }}</td>
+          <td>{{ activite.description }}</td>
+          <td>{{ activite.dateDebut | formatMediumDate }}</td>
+          <td>{{ activite.dateFin | formatMediumDate }}</td>
+          <td>{{ activite.raf }}</td>
+          <td jhiTranslate="{{ 'easyTasksApp.Etat.' + activite.etat }}">{{ activite.etat }}</td>
+          <td>
+            <div *ngIf="activite.livrable">
+              <a [routerLink]="['/livrable', activite.livrable.id, 'view']">{{ activite.livrable.refLivrable }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/activite', activite.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/activite', activite.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(activite)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

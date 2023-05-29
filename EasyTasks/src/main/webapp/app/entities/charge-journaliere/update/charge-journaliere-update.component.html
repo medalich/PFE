@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-charge-journaliere-heading"
+        data-cy="ChargeJournaliereCreateUpdateHeading"
+        jhiTranslate="easyTasksApp.chargeJournaliere.home.createOrEditLabel"
+      >
+        Créer ou éditer un Charge Journaliere
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.chargeJournaliere.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.chargeJournaliere.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.chargeJournaliere.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'easyTasksApp.TypeCharge.null' | translate }}</option>
+            <option *ngFor="let typeCharge of typeChargeValues" [value]="typeCharge">
+              {{ 'easyTasksApp.TypeCharge.' + typeCharge | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.chargeJournaliere.duree" for="field_duree">Duree</label>
+          <input type="number" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.chargeJournaliere.ressource" for="field_ressource">Ressource</label>
+          <select
+            class="form-control"
+            id="field_ressource"
+            data-cy="ressource"
+            name="ressource"
+            formControlName="ressource"
+            [compareWith]="compareRessource"
+          >
+            <option *ngIf="editForm.get(['ressource'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="ressourceOption" *ngFor="let ressourceOption of ressourcesSharedCollection">
+              {{ ressourceOption.nom }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['ressource'])!.invalid && (editForm.get(['ressource'])!.dirty || editForm.get(['ressource'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['ressource'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

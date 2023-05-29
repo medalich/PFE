@@ -1,0 +1,167 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-estimation-heading" data-cy="EstimationCreateUpdateHeading" jhiTranslate="easyTasksApp.estimation.home.createOrEditLabel">
+        Créer ou éditer un Estimation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.valeurJour" for="field_valeurJour">Valeur Jour</label>
+          <input
+            type="number"
+            class="form-control"
+            name="valeurJour"
+            id="field_valeurJour"
+            data-cy="valeurJour"
+            formControlName="valeurJour"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.valeurHeure" for="field_valeurHeure">Valeur Heure</label>
+          <input
+            type="number"
+            class="form-control"
+            name="valeurHeure"
+            id="field_valeurHeure"
+            data-cy="valeurHeure"
+            formControlName="valeurHeure"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.priseEnCharge" for="field_priseEnCharge">Prise En Charge</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="priseEnCharge"
+            id="field_priseEnCharge"
+            data-cy="priseEnCharge"
+            formControlName="priseEnCharge"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'easyTasksApp.TypeEntite.null' | translate }}</option>
+            <option *ngFor="let typeEntite of typeEntiteValues" [value]="typeEntite">
+              {{ 'easyTasksApp.TypeEntite.' + typeEntite | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.projet" for="field_projet">Projet</label>
+          <select
+            class="form-control"
+            id="field_projet"
+            data-cy="projet"
+            name="projet"
+            formControlName="projet"
+            [compareWith]="compareProjet"
+          >
+            <option *ngIf="editForm.get(['projet'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.refProjet }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['projet'])!.invalid && (editForm.get(['projet'])!.dirty || editForm.get(['projet'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['projet'])?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.livrable" for="field_livrable">Livrable</label>
+          <select
+            class="form-control"
+            id="field_livrable"
+            data-cy="livrable"
+            name="livrable"
+            formControlName="livrable"
+            [compareWith]="compareLivrable"
+          >
+            <option *ngIf="editForm.get(['livrable'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="livrableOption" *ngFor="let livrableOption of livrablesSharedCollection">
+              {{ livrableOption.refLivrable }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['livrable'])!.invalid && (editForm.get(['livrable'])!.dirty || editForm.get(['livrable'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['livrable'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="easyTasksApp.estimation.activite" for="field_activite">Activite</label>
+          <select
+            class="form-control"
+            id="field_activite"
+            data-cy="activite"
+            name="activite"
+            formControlName="activite"
+            [compareWith]="compareActivite"
+          >
+            <option *ngIf="editForm.get(['activite'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="activiteOption" *ngFor="let activiteOption of activitesSharedCollection">{{ activiteOption.refAct }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['activite'])!.invalid && (editForm.get(['activite'])!.dirty || editForm.get(['activite'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['activite'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

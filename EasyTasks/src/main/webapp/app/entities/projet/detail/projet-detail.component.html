@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projet">
+      <h2 data-cy="projetDetailsHeading"><span jhiTranslate="easyTasksApp.projet.detail.title">Projet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.refProjet">Ref Projet</span></dt>
+        <dd>
+          <span>{{ projet.refProjet }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyTasksApp.Type.' + projet.type }}">{{ projet.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.description">Description</span></dt>
+        <dd>
+          <span>{{ projet.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.datedebut">Datedebut</span></dt>
+        <dd>
+          <span>{{ projet.datedebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.datefin">Datefin</span></dt>
+        <dd>
+          <span>{{ projet.datefin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyTasksApp.Etat.' + projet.etat }}">{{ projet.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyTasksApp.projet.client">Client</span></dt>
+        <dd>
+          <div *ngIf="projet.client">
+            <a [routerLink]="['/client', projet.client.id, 'view']">{{ projet.client.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "easyTasksApp": {
+    "chargeJournaliere": {
+      "home": {
+        "title": "ChargeJournalieres",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Charge Journaliere",
+        "createOrEditLabel": "Créer ou éditer un Charge Journaliere",
+        "notFound": "Aucun Charge Journaliere trouvé"
+      },
+      "created": "Un nouveau Charge Journaliere a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Charge Journaliere avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Charge Journaliere avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Charge Journaliere {{ id }} ?"
+      },
+      "detail": {
+        "title": "Charge Journaliere"
+      },
+      "id": "ID",
+      "description": "Description",
+      "date": "Date",
+      "type": "Type",
+      "duree": "Duree",
+      "ressource": "Ressource"
+    }
+  }
+}

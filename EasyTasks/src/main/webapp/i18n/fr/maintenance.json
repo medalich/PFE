@@ -1,0 +1,31 @@
+{
+  "easyTasksApp": {
+    "maintenance": {
+      "home": {
+        "title": "Maintenances",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Maintenance",
+        "createOrEditLabel": "Créer ou éditer un Maintenance",
+        "notFound": "Aucun Maintenance trouvé"
+      },
+      "created": "Un nouveau Maintenance a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Maintenance avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Maintenance avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Maintenance {{ id }} ?"
+      },
+      "detail": {
+        "title": "Maintenance"
+      },
+      "id": "ID",
+      "description": "Description",
+      "produit": "Produit",
+      "solution": "Solution",
+      "etat": "Etat",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "duree": "Duree",
+      "ressource": "Ressource"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "applications": "*",
+  "changelogDate": "20230507160747",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "projet",
+  "fields": [
+    {
+      "fieldName": "refProjet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Type",
+      "fieldTypeJavadoc": "Task entity.\\n@author The JHipster team.",
+      "fieldValues": "Interne,Externe"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datedebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "datefin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Etat",
+      "fieldTypeJavadoc": "not an ignored comment",
+      "fieldValues": "Planifier,EnCours,Termine"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Projet",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "livrable",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "livrable",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "estimation",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "estimation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "facture",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "facture",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "client",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

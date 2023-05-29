@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="ChargeJournaliereHeading">
+    <span jhiTranslate="easyTasksApp.chargeJournaliere.home.title">ChargeJournalieres</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyTasksApp.chargeJournaliere.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-charge-journaliere"
+        [routerLink]="['/charge-journaliere/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="easyTasksApp.chargeJournaliere.home.createLabel"> Créer un nouveau Charge Journaliere </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="chargeJournalieres?.length === 0">
+    <span jhiTranslate="easyTasksApp.chargeJournaliere.home.notFound">Aucun Charge Journaliere trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="chargeJournalieres && chargeJournalieres.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.chargeJournaliere.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.chargeJournaliere.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.chargeJournaliere.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="duree">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.chargeJournaliere.duree">Duree</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ressource.nom">
+            <div class="d-flex">
+              <span jhiTranslate="easyTasksApp.chargeJournaliere.ressource">Ressource</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chargeJournaliere of chargeJournalieres; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/charge-journaliere', chargeJournaliere.id, 'view']">{{ chargeJournaliere.id }}</a>
+          </td>
+          <td>{{ chargeJournaliere.description }}</td>
+          <td>{{ chargeJournaliere.date | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'easyTasksApp.TypeCharge.' + chargeJournaliere.type }}">{{ chargeJournaliere.type }}</td>
+          <td>{{ chargeJournaliere.duree }}</td>
+          <td>
+            <div *ngIf="chargeJournaliere.ressource">
+              <a [routerLink]="['/ressource', chargeJournaliere.ressource.id, 'view']">{{ chargeJournaliere.ressource.nom }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/charge-journaliere', chargeJournaliere.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/charge-journaliere', chargeJournaliere.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(chargeJournaliere)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
